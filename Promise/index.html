@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log("Start");
+
+        //CallBack Hell................
+        // function test(val,CallBack){
+        //     setTimeout(() => {
+        //         console.log("Inside test..........");
+        //         CallBack(val);
+        //     }, 1000);
+        // }
+        // function testt(val,CallBack){
+        //     setTimeout(() => {
+        //         console.log("Inside testt..........");
+        //         CallBack(['a','b','c','d']);
+        //     }, 1000);
+        // }
+        // function testtt(val,CallBack){
+        //     setTimeout(() => {
+        //         console.log("Inside testtt.........");
+        //         CallBack([1,2,3,4,5])
+        //     }, 1000);
+        // }
+        // const func = test("Ram" , (func)=> {
+        //     console.log(func);
+        //     testt("ram",(funcc)=>{
+        //         console.log(funcc);
+        //     });
+        //     testtt("ram",(funccc)=> {
+        //         console.log(funccc);
+        //     });
+            
+        // });
+        //console.log(func); //undefind
+
+        //CallBack Hell................reslove problem
+        function test(val){
+            return new Promise((resolve,reject) => {
+                    setTimeout(() => {
+                        console.log("Inside test..........");
+                        resolve(val);
+                    }, 1000);
+            });
+        }
+        function testt(val){
+            return new Promise((resolve,reject) => {
+                setTimeout(() => {
+                    console.log("Inside testt..........");
+                    resolve([1,2,3,4,5])
+                }, 1000)
+            })
+        }
+        //promise
+        // test("ABC").then((value) => {
+        //     console.log("value....",value);  
+        //     testt(value).then((val) => {
+        //     console.log("value1.....",val);
+        // }).catch((e) => {
+        //     console.log("error...",e);
+        // })
+        // }).catch((e) => {
+        //     console.log("error...",e);
+        // })
+
+        //async function
+            async function asyncFinal(){
+                try {
+                    const name = await test('Ram');
+                    console.log("name.........",name);
+                    const arr = await testt(name);
+                    console.log("arr........",arr);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+        //Promise..........................
+        //1st example.......
+            // const prom = new Promise((reslove,reject)=> {
+            //     const boolean = true;
+            //     if(boolean == false){
+            //         reslove("Success!");
+            //     }
+            //     else{
+            //         reject("Failed!");
+            //     }
+            // }).then((val) => {
+            //     console.log(val);                    
+            // }).catch((val)=> {
+            //     console.log(val);
+            // }).finally(()=> {
+            //     console.log("final........");
+            // });
+
+        //2nd example.......
+        // const promise = new Promise((reslove,reject)=> {
+        //     let num = 10.5;
+        //     reslove(num);
+        // }).then((num1)=> {
+        //     console.log("num1=", num1);
+        //     return num1 + 5;
+        // }).then((num2)=> {
+        //     console.log("num2=", num2);
+        // }).catch((e)=>{
+        //     console.log("Error........",e);
+        // });
+        asyncFinal();
+        console.log("End");
+    </script>
+</body>
+</html>
